@@ -1,0 +1,8 @@
+
+Bridge
+
+Generic     Mac OS       Windows     Linux
+
+Button  ->  LWCButton    WButton     XButton 
+Label   ->  LWCLabel     WLabel      XLabel
+Text    ->  LWCText      WText       XText  
