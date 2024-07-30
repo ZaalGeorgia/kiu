@@ -67,7 +67,28 @@ public class TetrisTests {
 		assertFalse(valid);
 	}
 	
+	@Test
+	public void testPasteFigure() throws Exception {
+		model.pasteFigure();
+		assertEquals(1, model.field[0][model.size().x()/2-1]);
+		assertEquals(1, model.field[0][model.size().x()/2]);
+		assertEquals(1, model.field[1][model.size().x()/2-1]);
+		assertEquals(1, model.field[1][model.size().x()/2]);
+	}
 	
+	@Test
+	public void testMoveLeft() throws Exception {
+		var oldPos = model.position;
+		model.moveLeft();
+		assertEquals(oldPos.x() - 1, model.position.x());
+	}
+	
+	@Test
+	public void testMoveRight() throws Exception {
+		var oldPos = model.position;
+		model.moveRight();
+		assertEquals(oldPos.x() + 1, model.position.x());
+	}
 	
 	
 	
