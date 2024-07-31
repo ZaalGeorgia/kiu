@@ -2,7 +2,8 @@ package tetris;
 
 public class View {
 	
-	static final int BOX_SIZE = 20;
+	static final int BOX_SIZE = 30;
+	static final int ORIGIN = 50;
 	private Graphics graphics;
 
 	public View(Graphics graphics) {
@@ -10,27 +11,23 @@ public class View {
 	}
 
 	public void draw(TetrisModel model) {
-		drawField(model);
-		drawFigure(model);
+		drawData(model.field, 0, 0, true);
+		drawData(model.figure, model.position.y(), model.position.x(), false);
 	}
 
-	private void drawFigure(TetrisModel model) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void drawField(TetrisModel model) {
-		var f = model.field;
+	private void drawData(int[][] f, int row, int col, boolean drawBackground) {
 		
 		for (int r = 0; r < f.length; r++) {
 			for (int c = 0; c < f[r].length; c++) {
-				drawBox(r,c,f[r][c]);
+				if (!drawBackground && f[r][c] == 0)
+					continue;
+				drawBox(r + row,c + col,f[r][c]);
 			}
 		}
 	}
 
 	private void drawBox(int row, int col, int value) {
-		graphics.drawBoxAt(col * BOX_SIZE, row * BOX_SIZE, value);
+		graphics.drawBoxAt(ORIGIN + col * BOX_SIZE, ORIGIN + row * BOX_SIZE, value);
 	}
 
 }
