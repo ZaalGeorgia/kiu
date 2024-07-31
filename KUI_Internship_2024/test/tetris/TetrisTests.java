@@ -24,7 +24,7 @@ public class TetrisTests {
 
 	@Test
 	public void testFieldExsistence() {
-		int[][] field = model.field;
+		int[][] field = model.state.field;
 		assertNotNull(field);
 		assertEquals(TetrisModel.DEFAULT_HEIGHT, field.length);
 	}
@@ -36,13 +36,13 @@ public class TetrisTests {
 
 	@Test
 	public void testFigureCreated() throws Exception {
-		int[][] figure = model.figure;
+		int[][] figure = model.state.figure;
 		assertNotNull(figure);
 	}
 	
 	@Test
 	public void positionExists() throws Exception {
-		Pair p = model.position;
+		Pair p = model.state.position;
 		assertNotNull(p);
 		assertEquals(0, p.y());
 		assertEquals(model.size().x() / 2 - 2, p.x());
@@ -55,39 +55,39 @@ public class TetrisTests {
 	
 	@Test
 	public void testSlideDown() throws Exception {
-		int old = model.position.y();
+		int old = model.state.position.y();
 		model.slideDown();
-		assertEquals(old + 1, model.position.y());
+		assertEquals(old + 1, model.state.position.y());
 	}
 	
 	@Test
 	public void testFigureNotOverlapsFieldCellsAfterSlidingDown() throws Exception {
-		model.field[2][model.size().x()/2] = 1;
-		boolean valid = model.isNewFiguresPositionValid(new Pair(model.position.x(), model.position.y() + 1));
+		model.state.field[2][model.size().x()/2] = 1;
+		boolean valid = model.isNewFiguresPositionValid(new Pair(model.state.position.x(), model.state.position.y() + 1));
 		assertFalse(valid);
 	}
 	
 	@Test
 	public void testPasteFigure() throws Exception {
 		model.pasteFigure();
-		assertEquals(1, model.field[0][model.size().x()/2-1]);
-		assertEquals(1, model.field[0][model.size().x()/2]);
-		assertEquals(1, model.field[1][model.size().x()/2-1]);
-		assertEquals(1, model.field[1][model.size().x()/2]);
+		assertEquals(1, model.state.field[0][model.size().x()/2-1]);
+		assertEquals(1, model.state.field[0][model.size().x()/2]);
+		assertEquals(1, model.state.field[1][model.size().x()/2-1]);
+		assertEquals(1, model.state.field[1][model.size().x()/2]);
 	}
 	
 	@Test
 	public void testMoveLeft() throws Exception {
-		var oldPos = model.position;
+		var oldPos = model.state.position;
 		model.moveLeft();
-		assertEquals(oldPos.x() - 1, model.position.x());
+		assertEquals(oldPos.x() - 1, model.state.position.x());
 	}
 	
 	@Test
 	public void testMoveRight() throws Exception {
-		var oldPos = model.position;
+		var oldPos = model.state.position;
 		model.moveRight();
-		assertEquals(oldPos.x() + 1, model.position.x());
+		assertEquals(oldPos.x() + 1, model.state.position.x());
 	}
 	
 	

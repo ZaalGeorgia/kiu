@@ -11,17 +11,17 @@ public class View {
 	}
 
 	public void draw(TetrisModel model) {
-		drawData(model.field, 0, 0, true);
-		drawData(model.figure, model.position.y(), model.position.x(), false);
+		drawData(new DrawDataParameter(model.state.field, 0, 0, true));
+		drawData(new DrawDataParameter(model.state.figure, model.state.position.y(), model.state.position.x(), false));
 	}
 
-	private void drawData(int[][] f, int row, int col, boolean drawBackground) {
+	private void drawData(DrawDataParameter parameterObject) {
 		
-		for (int r = 0; r < f.length; r++) {
-			for (int c = 0; c < f[r].length; c++) {
-				if (!drawBackground && f[r][c] == 0)
+		for (int r = 0; r < parameterObject.fs.length; r++) {
+			for (int c = 0; c < parameterObject.fs[r].length; c++) {
+				if (!parameterObject.drawBackground && parameterObject.fs[r][c] == 0)
 					continue;
-				drawBox(r + row,c + col,f[r][c]);
+				drawBox(r + parameterObject.row,c + parameterObject.col,parameterObject.fs[r][c]);
 			}
 		}
 	}
