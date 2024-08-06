@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 class Figure {
-	static int x = Columns.Width / 2 + 1, y = 1;
+	static int x = Model.Width / 2 + 1, y = 1;
 	static Random r = new Random();
 
 	static void rotateArraysElementsLeft(int[] c) {
@@ -32,7 +32,7 @@ class Figure {
 	private int c[] = new int[3];
 
 	Figure() {
-		x = Columns.Width / 2 + 1;
+		x = Model.Width / 2 + 1;
 		y = 1;
 		c[0] = (int) (Math.abs(r.nextInt()) % 7 + 1);
 		c[1] = (int) (Math.abs(r.nextInt()) % 7 + 1);
