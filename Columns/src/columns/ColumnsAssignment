@@ -1,0 +1,7 @@
+1. Extract Controller
+2. Applet ->  Desktop
+3. (optional) introduce animations
+  a. pausing game should show blinking figure
+  b. remove neighbors  with some delays
+4. implement increase/decrease level
+5. build cross-platform project with LibGDX

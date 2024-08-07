@@ -4,25 +4,33 @@ import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Graphics;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class Columns extends Applet implements Runnable, ModelListener {
+public class Columns extends Applet implements ModelListener {
 
 	static final int TimeShift = 250;
 	static final int MinTimeShift = 200;
 
-	int keyPressedCode;
-	long lastTimeFigureMoved;
-	boolean keyPressed = false;
-
 	Model model = new Model();
 	View view = new View();
-	Thread thr = null;
+	private ScheduledExecutorService timer;
 
+	
+	
+	//-----------------------------< Applet methods implementations >--------------------
+
+	
 	@Override
 	public void init() {
 		model.initModel();
 		model.addListener(this);
 		view.initView(getGraphics());
+		model.initMatrixes();
+		model.initMembers();
+		model.createNewFigure();
+		requestFocus();
 	}
 
 	@Override
@@ -31,10 +39,8 @@ public class Columns extends Applet implements Runnable, ModelListener {
 
 		// setBackground (new Color(180,180,180));
 
-		if (thr == null) {
-			thr = new Thread(this);
-			thr.start();
-		}
+		timer = Executors.newSingleThreadScheduledExecutor();
+		timer.scheduleAtFixedRate(model::trySlideDown, 1, 1, TimeUnit.SECONDS);
 	}
 
 	@Override
@@ -52,83 +58,34 @@ public class Columns extends Applet implements Runnable, ModelListener {
 
 	@Override
 	public void stop() {
-		if (thr != null) {
-			thr.stop();
-			thr = null;
-		}
+		timer.shutdown();
 	}
 
+	@Override
+	public boolean keyDown(Event e, int k) {
+		processUserActions(e.key);
+		return true;
+	}
+
+	//-----------------------------< ModelListener implementations >--------------------
 	
 	@Override
 	public void foundNeighboursAt(int a, int b, int c, int d, int i, int j) {
-		view.drawBox(a, b, 8);
-		view.drawBox(j, i, 8);
-		view.drawBox(c, d, 8);
-	}
-
-
-	void Delay(long t) {
-		try {
-			Thread.sleep(t);
-		} catch (InterruptedException e) {
-		}
-	}
-
-	public boolean keyDown(Event e, int k) {
-		keyPressed = true;
-		keyPressedCode = e.key;
-		return true;
-	}
-
-	public boolean lostFocus(Event e, Object w) {
-		keyPressed = true;
-		keyPressedCode = 'P';
-		return true;
-	}
-
-	public void run() {
-		model.initMatrixes();
-		model.initMembers();
-		requestFocus();
-
-		do {
-			lastTimeFigureMoved = System.currentTimeMillis();
-			model.Fig = new Figure();
-			view.drawFigure(model.Fig);
-			while (true) {
-				if (isItTimeToSlideDown()) {
-					lastTimeFigureMoved = System.currentTimeMillis();
-					view.hideFigure(model.Fig.x, model.Fig.y);
-					if (!model.trySlideDown()) {
-						break;
-					}
-					view.drawFigure(model.Fig);
-				}
-				model.DropScore = 0;
-				do {
-					processUserActions();
-				} while (!isItTimeToSlideDown());
-			}
-			model.PasteFigure(model.Fig);
-			do {
-				model.removeSimilarNeighboringCells();
-			} while (!model.noChanges);
-		} while (!model.isFieldFull(this));
-		gameOver();
-	}
-
-	private void gameOver() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private boolean isItTimeToSlideDown() {
-		return (int) (System.currentTimeMillis() - lastTimeFigureMoved) > (Model.MaxLevel - model.level) * TimeShift
-				+ MinTimeShift;
+		view.highlightNeighbours(a, b, c, d, i, j);
 	}
 
 	@Override
-	public void fieldIsPacked(int[][] newField) {
+	public void figureMovedFrom(int oldX, int oldY) {
+		view.moveAndDrawFigure(model.Fig, oldX, oldY);
+	}
+
+	@Override
+	public void figureUpdated(Figure fig) {
+		view.drawFigure(fig);
+	}
+
+	@Override
+	public void fieldUpdated(int[][] newField) {
 		view.drawField(newField);
 	}
 
@@ -142,65 +99,62 @@ public class Columns extends Applet implements Runnable, ModelListener {
 		view.showLevel(level);
 	}
 
+	public boolean lostFocus(Event e, Object w) {
+		processUserActions('P');
+		return true;
+	}
 
-	private void processUserActions() {
-		Delay(50);
-		if (keyPressed) {
-			keyPressed = false;
+	@Override
+	public void gameOver() {
+		// TODO HomeWork
+
+	}
+
+	private void processUserActions(int keyPressedCode) {
 			switch (keyPressedCode) {
 			case Event.LEFT:
 				model.tryMoveLeft();
 				break;
 			case Event.RIGHT:
-				if ((model.Fig.x < Model.Width) && (model.newField[model.Fig.x + 1][model.Fig.y + 2] == 0)) {
-					view.hideFigure(model.Fig.x, model.Fig.y);
-					model.Fig.x++;
-					view.drawFigure(model.Fig);
-				}
+				model.tryMoveRight();
 				break;
 			case Event.UP:
-				model.Fig.rotateFigureCellsLeft();
-				view.drawFigure(model.Fig);
+				model.rotateUp();
 				break;
 			case Event.DOWN:
-				model.Fig.rotateFigureCellsRight();
-				view.drawFigure(model.Fig);
+				model.rotateDown();
 				break;
 			case ' ':
-				view.hideFigure(model.Fig.x, model.Fig.y);
-				model.dropFigure(this, model.Fig);
-				view.drawFigure(model.Fig);
-				lastTimeFigureMoved = 0;
+				model.dropFigure(model.Fig);
 				break;
-			case 'P':
-			case 'p':
-				while (!keyPressed) {
-					view.hideFigure(model.Fig.x, model.Fig.y);
-					Delay(500);
-					view.drawFigure(model.Fig);
-					Delay(500);
-				}
-				lastTimeFigureMoved = System.currentTimeMillis();
-				break;
-			case '-':
-				if (model.level > 0)
-					model.descreaseLevel();
-				model.removedCellsCounter = 0;
-				view.showLevel(model.level);
-				break;
-			case '+':
-				if (model.level < Model.MaxLevel)
-					model.increaseLevel();
-				model.removedCellsCounter = 0;
-				view.showLevel(model.level);
-				break;
-			}
-		}
-	}
 
-	@Override
-	public void figureMovedFrom(int oldX, int oldY) {
-		view.moveAndDrawFigure(model.Fig, oldX, oldY);
+				// TODO:  HomeWork:  move to a separate thread
+//			case 'P':
+//			case 'p':
+//				while (!keyPressed) {
+//					int oldX3 = model.Fig.x;
+//					view.hideFigure(oldX3, oldY);
+//					Delay(500);
+//					view.drawFigure(model.Fig);
+//					Delay(500);
+//				}
+//				lastTimeFigureMoved = System.currentTimeMillis();
+//				break;
+				
+				// TODO:  HomeWork
+//			case '-':
+//				if (model.level > 0)
+//					model.descreaseLevel();
+//				model.removedCellsCounter = 0;
+//				view.showLevel(model.level);
+//				break;
+//			case '+':
+//				if (model.level < Model.MaxLevel)
+//					model.increaseLevel();
+//				model.removedCellsCounter = 0;
+//				view.showLevel(model.level);
+//				break;
+		}
 	}
 
 }

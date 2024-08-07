@@ -104,4 +104,11 @@ public class View {
 		drawFigure(fig);
 	}
 
+
+	void highlightNeighbours(int a, int b, int c, int d, int i, int j) {
+		drawBox(a, b, 8);
+		drawBox(j, i, 8);
+		drawBox(c, d, 8);
+	}
+
 }
