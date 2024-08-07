@@ -98,7 +98,7 @@ public class Columns extends Applet implements Runnable, ModelListener {
 			while (true) {
 				if (isItTimeToSlideDown()) {
 					lastTimeFigureMoved = System.currentTimeMillis();
-					view.hideFigure(model.Fig);
+					view.hideFigure(model.Fig.x, model.Fig.y);
 					if (!model.trySlideDown()) {
 						break;
 					}
@@ -149,15 +149,11 @@ public class Columns extends Applet implements Runnable, ModelListener {
 			keyPressed = false;
 			switch (keyPressedCode) {
 			case Event.LEFT:
-				if ((model.Fig.x > 1) && (model.newField[model.Fig.x - 1][model.Fig.y + 2] == 0)) {
-					view.hideFigure(model.Fig);
-					model.Fig.x--;
-					view.drawFigure(model.Fig);
-				}
+				model.tryMoveLeft();
 				break;
 			case Event.RIGHT:
 				if ((model.Fig.x < Model.Width) && (model.newField[model.Fig.x + 1][model.Fig.y + 2] == 0)) {
-					view.hideFigure(model.Fig);
+					view.hideFigure(model.Fig.x, model.Fig.y);
 					model.Fig.x++;
 					view.drawFigure(model.Fig);
 				}
@@ -171,7 +167,7 @@ public class Columns extends Applet implements Runnable, ModelListener {
 				view.drawFigure(model.Fig);
 				break;
 			case ' ':
-				view.hideFigure(model.Fig);
+				view.hideFigure(model.Fig.x, model.Fig.y);
 				model.dropFigure(this, model.Fig);
 				view.drawFigure(model.Fig);
 				lastTimeFigureMoved = 0;
@@ -179,7 +175,7 @@ public class Columns extends Applet implements Runnable, ModelListener {
 			case 'P':
 			case 'p':
 				while (!keyPressed) {
-					view.hideFigure(model.Fig);
+					view.hideFigure(model.Fig.x, model.Fig.y);
 					Delay(500);
 					view.drawFigure(model.Fig);
 					Delay(500);
@@ -200,6 +196,11 @@ public class Columns extends Applet implements Runnable, ModelListener {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void figureMovedFrom(int oldX, int oldY) {
+		view.moveAndDrawFigure(model.Fig, oldX, oldY);
 	}
 
 }

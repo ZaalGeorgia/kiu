@@ -63,10 +63,10 @@ public class View {
 	    drawBox(f.x, f.y+2,c[2]);
 	}
 
-	void hideFigure(Figure f) {
-	    drawBox(f.x, f.y,0);
-	    drawBox(f.x, f.y+1,0);
-	    drawBox(f.x, f.y+2,0);
+	void hideFigure(int x, int y) {
+		drawBox(x, y, 0);
+		drawBox(x, y+1, 0);
+		drawBox(x, y+2, 0);
 	}
 
 
@@ -96,6 +96,12 @@ public class View {
 		gr.setColor(Color.black);
 		gr.clearRect(View.LeftBorder, 390, 100, 20);
 		gr.drawString("Score: " + score, View.LeftBorder, 400);
+	}
+
+
+	void moveAndDrawFigure(Figure fig, int oldX, int oldY) {
+		hideFigure(oldX, oldY);
+		drawFigure(fig);
 	}
 
 }

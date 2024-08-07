@@ -1,10 +1,9 @@
 package columns;
 
-import java.util.Arrays;
 import java.util.Random;
 
 class Figure {
-	static int x = Model.Width / 2 + 1, y = 1;
+	
 	static Random r = new Random();
 
 	static void rotateArraysElementsLeft(int[] c) {
@@ -21,14 +20,9 @@ class Figure {
 		c[1] = i;
 	}
 	
-//	private static void rotateElements(int[] data, int direction) {
-//		int i = data[1 + direction];
-//		data[0] = data[(0 + direction + 3) % 3];
-//		data[1] = data[(1 + direction + 3) % 3];
-//		data[2] = data[(2 + direction + 3) % 3];
-//		data[1 - direction] = i;
-//	}
-//	
+
+	int x = Model.Width / 2 + 1, y = 1;
+	
 	private int c[] = new int[3];
 
 	Figure() {

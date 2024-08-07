@@ -1,6 +1,6 @@
 package columns;
 
-import java.awt.Container;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
@@ -18,7 +18,7 @@ public class Model {
 	public int[][] oldField;
 	public boolean noChanges = true;
 	
-	private List<ModelListener> listeners;
+	List<ModelListener> listeners = new ArrayList<>();
 
 	void dropFigure(Columns columns, Figure f) {
 		int zz;
@@ -180,6 +180,22 @@ public class Model {
 		removedCellsCounter = 0;
 		if (level < Model.MaxLevel) {
 			increaseLevel();
+		}
+	}
+
+	void tryMoveLeft() {
+		if ((Fig.x > 1) && (newField[Fig.x - 1][Fig.y + 2] == 0)) {
+			int oldX = Fig.x;
+			int oldY = Fig.y;
+			Fig.x--;
+			fireFigureMovedEvent(oldX, oldY);
+	//			moveAndDrawFigure(oldX, oldY);
+		}
+	}
+
+	private void fireFigureMovedEvent(int oldX, int oldY) {
+		for (ModelListener modelListener : listeners) {
+			modelListener.figureMovedFrom(oldX, oldY);
 		}
 	}
 

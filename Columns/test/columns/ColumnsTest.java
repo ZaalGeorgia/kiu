@@ -23,4 +23,10 @@ public class ColumnsTest {
 		assertArrayEquals(rotatedRight, data);
 	}
 	
+	@Test
+	public void testModelListenersAreInitialized() throws Exception {
+		Model model = new Model();
+		assertNotNull(model.listeners);
+	}
+	
 }

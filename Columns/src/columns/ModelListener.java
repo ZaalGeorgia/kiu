@@ -10,4 +10,6 @@ public interface ModelListener {
 
 	void levelHasChanged(int level);
 
+	void figureMovedFrom(int oldX, int oldY);
+
 }
