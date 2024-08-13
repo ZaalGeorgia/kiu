@@ -1,0 +1,15 @@
+
+2^5 = 32
+
+ASCII 
+
+8 * 8 = 64 bits -->  long integer!
+
+sorted array of longs of length 1,000,000
+how many operations max I need to find a long integer in the array?
+20
+
+original brute force - 5 min (python)
+k-mers (python)  - 5 sec
+binary search in longs array of peptides  in java   -  ???  3 ms 
+
