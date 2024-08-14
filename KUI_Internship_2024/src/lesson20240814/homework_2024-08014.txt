@@ -1,0 +1,41 @@
+Peptides -  very small proteins.
+
+Input:
+Long protein structure (10K length, aminoacides)
+Peptides ‘library’ (100K – 1mln pcs)
+Each peptide is 8 aminoacids length
+Aminoacids are encoded by Latin alphabet letters, 26
+
+Output:  all positions of all peptides found in the long protein
+
+
+Approach 1: (done)
+
+use k-mers as we did before to find duplicates.
+Generate all k-mers (8-mers in our case) from long protein,
+put them into dictionary (Map<k-mer, position>) and then
+take peptides from library one by one and check whether it is in the map.
+If so, fetch matching k-mer’s position and put into a list for the peptide.
+
+
+Approach 2:
+Reverse compared to 1st one.
+Put peptides into a Map (Map<peptide, list of positions>) 
+and then take k-mers from long protein one by one, 
+sliding 1 position to the right every time.
+Then check whether the current k-mer is in the Map of peptides. 
+If so, put k-mer’s position into a list of positions for the peptide.
+
+
+Approach 3:
+
+Generate map of peptides as long integers
+and re-apply approach 2: for each k-mer convert it
+into a long integer and search for it in a Map of peptides.
+
+
+Approach 4: use Binary Search!
+
+Instead of using Map of peptides just put their
+long integer representation into an array of longs
+and sort it.Then search for each k-mer in the array.
