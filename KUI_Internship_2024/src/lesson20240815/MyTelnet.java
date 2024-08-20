@@ -39,6 +39,7 @@ public class MyTelnet {
 			PrintWriter printer = new PrintWriter(socket.getOutputStream());
 			Scanner scanner = new Scanner(System.in);
 			thread = new Thread(() -> {
+				System.out.println("OutputProcessor at thread " + Thread.currentThread());
 				System.out.println("enter command:");
 				while (scanner.hasNextLine()) {
 					String line = scanner.nextLine();
@@ -53,6 +54,7 @@ public class MyTelnet {
 	}
 
 	private static void processSocketInput(Socket socket) {
+		System.out.println("InputProcessor at thread " + Thread.currentThread());
 		try (Scanner scanner = new Scanner(socket.getInputStream())) {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
@@ -61,6 +63,8 @@ public class MyTelnet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("finished listening for server input");
+		System.exit(0);
 	}
 
 }
