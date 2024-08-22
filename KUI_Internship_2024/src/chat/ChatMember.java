@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
 
+import lesson20240820.WorkerThread;
+
 public class ChatMember {
 
 	static Random r = new Random();
@@ -13,14 +15,16 @@ public class ChatMember {
 	private String name;
 	private ChatServer server;
 	private PrintWriter printer;
-	
+
+	private WorkerThread sendingWorker;
+
 	public ChatMember(ChatServer server) {
 		this.server = server;
 	}
 
-	void handleConnection(Socket socket) throws IOException {
-		initializeInputProcessing(socket);
+	void handleConnection(Socket socket) {
 		initializeOutputProcessing(socket);
+		processInput(socket);
 	}
 
 	private void initializeOutputProcessing(Socket socket) {
@@ -29,33 +33,32 @@ public class ChatMember {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		sendingWorker = new WorkerThread();
 	}
 
-	private void initializeInputProcessing(Socket socket) {
-		ChatServer.service.submit(() -> {
-			System.out.println("got a connection! thread: " + Thread.currentThread());
-			try (Scanner scanner = new Scanner(socket.getInputStream())) {
-				while (scanner.hasNextLine()) {
-					String command = scanner.nextLine();
-					ChatServer.service.submit(()->{
-						process(command);
-					});
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+	private void processInput(Socket socket) {
+		System.out.println("got a connection! thread: " + Thread.currentThread());
+		try (Scanner scanner = new Scanner(socket.getInputStream())) {
+			while (scanner.hasNextLine()) {
+				String command = scanner.nextLine();
+				ChatServer.service.submit(() -> {
+					process(command);
+				});
 			}
-		});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	void process(String command) {
 		String[] tokens = command.split(":");
 		String keyword = tokens[0];
-		switch(keyword) {
+		switch (keyword) {
 		case "name": {
 			this.name = tokens[1];
 			server.publish(name + " just joined the chat");
 		}
-		break;
+			break;
 		case "msg": {
 			if (name == null) {
 				send("set name fist:  name:<you-name>");
@@ -63,11 +66,11 @@ public class ChatMember {
 			}
 			server.publish(name + ": " + tokens[1]);
 		}
-		break;
+			break;
 		case "exit": {
-			// TODO:  homework
+			// TODO: homework
 		}
-		break;
+			break;
 		default: {
 			System.err.println("unknown command " + command);
 		}
@@ -75,6 +78,12 @@ public class ChatMember {
 	}
 
 	public void send(String message) {
+		sendingWorker.execute(() -> {
+			actualSend(message);
+		});
+	}
+
+	private void actualSend(String message) {
 		try {
 			Thread.sleep(r.nextInt(5000));
 		} catch (InterruptedException e) {

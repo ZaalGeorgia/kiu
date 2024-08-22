@@ -26,7 +26,9 @@ public class ChatServer {
 				Socket socket = serverSocket.accept();
 				ChatMember member = new ChatMember(this);
 				members.add(member);
-				member.handleConnection(socket);
+				service.submit(() -> {
+					member.handleConnection(socket);
+				});
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -35,7 +37,9 @@ public class ChatServer {
 
 	public void publish(String message) {
 		for (ChatMember chatMember : members) {
-			chatMember.send(message);
+			service.submit(()-> {
+				chatMember.send(message);
+			});
 		}
 	}
 
