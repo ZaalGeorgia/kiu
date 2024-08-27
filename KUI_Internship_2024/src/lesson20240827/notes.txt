@@ -1,0 +1,14 @@
+
+Sequential
+main              : READ -> PROCESS -> WRITE  READ -> PROCESS -> WRITE  READ -> PROCESS -> WRITE
+
+Concurrent
+
+reading thread    : READ1 READ2 READ3
+processing thread :       PROCESS1 PROCESS2 PROCESS3
+writing thread    :                 WRITE1  WRITE2   WRITE3
+
+
+
+homework:
+
