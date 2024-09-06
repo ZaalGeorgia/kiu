@@ -1,0 +1,22 @@
+-------------------------------------
+homework-2024-08-20   (1 point)
+
+make BlockingQueue thread-safe to avoid race condition
+
+-------------------------------------
+homework-2024-08-22   (0.5 points)
+
+Chat:  implement "exit" command interpretation in ChatMember
+
+-------------------------------------
+homework-2024-08-27  (1.5 point)
+
+Implement BlockingQueue using Semaphore
+Implement BlockingQueue using Locks
+
+-------------------------------------
+homework-2024-08-29   (1.5 points)
+
+1. repeat all steps from video to improve performance of SinglePassSamProgram
+2. run CollectAlignmentSummaryMetrics & CollectInsertSizeMetrics with original and modified jar
+3. compare results 

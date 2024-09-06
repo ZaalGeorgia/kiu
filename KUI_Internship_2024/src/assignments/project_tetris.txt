@@ -1,0 +1,10 @@
+up to 5 points
+
+0. add all figures from classic tetris
+1. implement rotate (arrow up)
+2. implement drop (arrow down)
+3. implement full row removal from the field
+4. implement game over
+5. add score calculation and visualization
+6. add difficulty level support (increase speed of the game when score reaches some limits) 
+7. use LibGDX

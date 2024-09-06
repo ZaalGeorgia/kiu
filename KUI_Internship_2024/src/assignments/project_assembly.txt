@@ -1,0 +1,34 @@
+
+Part 1:  (1 point)
+
+Create a De Bruijn graph from a string, k = 4
+
+GATCACAGGTCTATCACCCTATTAACCACTCACGGGAGCTCTCCATGCATTTGGTATTTTCGTCTGGGGGGTGTGCACGCGATAGCATTGCGAGACGCTGGAGCCGGAGCACCCTATGTCGCAGTATCTGTCTTTGATTCCTGCCTCATTCTATTATTTATCGCACCTACGTTCAATATTACAGGCGAACATACCTACTAAAGTGTGTTAATTAATTAATGCTTGTAGGACATAATAATAACAATTGAAT
+
+prefix & suffix length = k-1 == 3
+
+
+Example:
+
+genome: GATCACA
+
+k-mers & prefix-suffix pairs
+GATC  ->  GAT, ATC
+ATCA  ->  ATC, TCA
+TCAC  ->  TCA, CAC
+CACA  ->  CAC, ACA
+
+Resulting graph:
+GAT -> ATC
+ATC -> TCA
+TCA -> CAC
+CAC -> ACA
+
+
+Part 2: (2 points)
+
+Having a De Bruijn graph, reconstruct genome using Eulerian path approach: 
+traverse a graph so that every edge will be used only once.
+
+Starting point:  a node with 0 InDegree
+Ending point:  a node with 0 OutDegree
