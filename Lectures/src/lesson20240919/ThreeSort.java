@@ -11,6 +11,8 @@ public class ThreeSort {
 		int a = Integer.parseInt(args[0]);
 		int b = Integer.parseInt(args[1]);
 		int c = Integer.parseInt(args[2]);
+
+		System.out.println(a + " " + b + " " + c);
 		
 		// ??
 		if (a > b) {
@@ -19,7 +21,9 @@ public class ThreeSort {
 			b = t;
 		}
 		
-//		System.out.println(t);   OUT OF SCOPE!
+//		System.out.println(t);  // OUT OF SCOPE!
+		
+		System.out.println(a + " " + b + " " + c);
 
 		if (a > c) {
 			int t = a;
@@ -27,14 +31,14 @@ public class ThreeSort {
 			c = t;
 		}
 		
+		System.out.println(a + " " + b + " " + c);
+
 		if (b > c) {
 			int t = c;
 			c = b;
 			b = t;
 		}
 		
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(c);
+		System.out.println(a + " " + b + " " + c);
 	}
 }

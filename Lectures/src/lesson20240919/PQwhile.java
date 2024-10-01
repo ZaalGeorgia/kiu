@@ -5,11 +5,11 @@ public class PQwhile {
 		int n = Integer.parseInt(args[0]);
 		int i = 0;
 		int v = 1;
-		
-		while (i <= n)  // infinite loop
+
+		while (i <= n) {
 			System.out.println(v);
-		
-		i = i + 1;
-		v = 2 * v;
+			i = i + 1;
+			v = 2 * v;
+		}
 	}
 }

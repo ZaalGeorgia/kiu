@@ -9,7 +9,9 @@ public class PowersOfTwo {
 			System.out.println(i + " -> " + v);
 			v = 2 * v;
 //			i = i + 1;
+//			i += 1;
 			i++;
 		}
+		System.out.println("finished");
 	}
 }
