@@ -36,7 +36,7 @@ public class Deck {
 		System.out.println();
 		
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < N; i++) {
 			int r = i + (int) (Math.random() * (52 - i));
 			String t = deck[r];
 			deck[r] = deck[i];
