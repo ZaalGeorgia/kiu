@@ -7,7 +7,7 @@ public class DNAStats {
 		byte[] NUCLEOTIDES = {'A', 'T', 'C', 'G'};
 		
 		
-		int N = 1_000_000;
+		int N = 100_000_000;
 		
 		byte[] data = new byte[N ];
 		

@@ -4,8 +4,8 @@ public class NestlingExamples {
 
 	public static void main(String[] args) {
 
-		int trials = 10;
-		int stake = 5;
+		int trials = 100;
+		int stake = 25;
 		int goal = 100;
 		int wins = 0;
 		
@@ -23,6 +23,8 @@ public class NestlingExamples {
 				wins++;
 			}
 		}
+		
+		System.out.println(wins);
 
 	}
 
