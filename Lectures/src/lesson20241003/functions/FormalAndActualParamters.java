@@ -19,11 +19,11 @@ public class FormalAndActualParamters {
 		System.out.println(i);
 	}
 
-	private static int square(final int i) { //  int i == 2
+	private static int square(int i) { //  int i == 2
 		return i * i;
 	}
 	
-	static void set10(final int i) { // int i = 0
+	static void set10(int i) { // int i = 0
 		// i = 10;  error: - can't change value of final variable 
 	}
 

@@ -1,9 +1,9 @@
-package utils;
+package lesson20241015.recursion;
 
 public class Fibonacci {
 	
 	static int fib (final int n) {
-		if (n < 2) {
+		if (n < 2) {  // base case
 			return n;
 		}
 		return fib(n-2) + fib (n-1);
