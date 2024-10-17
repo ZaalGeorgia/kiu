@@ -1,17 +1,17 @@
 package lesson20241015.recursion;
 
-public class Recursice01 {
+public class Recursive01 {
 	
 	public static void main(String[] args) {
 		
-		a(10);
+		printNumbers(2);
 		
 	}
 
-	private static void a(int i) {
+	private static void printNumbers(int i) {
 		if (i < 0) return;  // base case
-		a(i - 1);
 		System.out.println(i);
+		printNumbers(i-1);
 	}
 
 }
