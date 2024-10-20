@@ -4,7 +4,7 @@ public class Recursive01 {
 	
 	public static void main(String[] args) {
 		
-		printNumbers(2);
+		printNumbers(5);
 		
 	}
 

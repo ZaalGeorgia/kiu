@@ -2,7 +2,7 @@ package lesson20241016;
 
 public class FibonacciMemo {
 
-	static long memo[];
+	static long memo[]; // memoization, dynamic programming
 	
 	
 	static long fib (final int n) {
