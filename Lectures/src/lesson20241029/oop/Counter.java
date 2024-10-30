@@ -4,11 +4,11 @@ public class Counter {
 	
 	int count;   // state,  instance field
 	
-	void passengerPassed() {
+	void passengerPassed() {  // mutator
 		count++;
 	}
 	
-	int getCount() {
+	int getCount() {  // get state
 		return count;
 	}
 
