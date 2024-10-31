@@ -21,6 +21,11 @@ public class Car {
 		this.maxSpeed = maxSpeed;
 	}
 
+	@Override
+	public String toString() {
+		return name + "\n" + enginePower + "\n" + color + "\n" + price + "\n" + maxSpeed;
+	}
+	
 	
 	void paint(Color newColor) {
 		color = newColor;
