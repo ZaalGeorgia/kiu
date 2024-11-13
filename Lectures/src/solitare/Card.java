@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 class Card {
-	final static int heart = 0;
+	final static int HEART = 0;  // CONSTANT
 	final static int spade = 1;
 	final static int diamond = 2;
 	final static int club = 3;
@@ -26,9 +26,9 @@ class Card {
 	Card link;
 
 	// constructor
-	Card(final int sv, final int rv) {
-		suit = sv;
-		rank = rv;
+	Card(final int suitValue, final int rankValue) {
+		suit = suitValue;
+		rank = rankValue;
 		faceup = false;
 		link = null;
 	}
@@ -47,7 +47,7 @@ class Card {
 			}
 			g.drawString(names[getRank()], x + 3, y + 15);
 			switch (getSuit()) {
-			case heart: {
+			case HEART: {
 				g.drawLine(x + 25, y + 30, x + 35, y + 20);
 				g.drawLine(x + 35, y + 20, x + 45, y + 30);
 				g.drawLine(x + 45, y + 30, x + 25, y + 60);
@@ -90,10 +90,7 @@ class Card {
 	}
 
 	public int getColor() {
-		if (getSuit() == heart || getSuit() == diamond) {
-			return red;
-		}
-		return black;
+		return getSuit() == HEART || getSuit() == diamond ? red : black;
 	}
 	
 	public boolean isFaceUp() {

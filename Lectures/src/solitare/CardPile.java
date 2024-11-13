@@ -47,7 +47,7 @@ class CardPile {
 				&& clickY <= y + Card.height;
 	}
 
-	public void select(final int tx, final int ty) {
+	public void select(final int tx, final int ty) {  // stub
 		// do nothing
 	}
 

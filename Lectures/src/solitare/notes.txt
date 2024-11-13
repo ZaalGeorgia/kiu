@@ -1,0 +1,26 @@
+
+[ 10 spades 4 ]     result = 2
+           |
+[ A spades 6 ]  <---   firstCard = 4  
+           |
+[ A club   8 ]
+           |
+[ 2 hearts 11 ]
+           |
+           V
+[ J diamond x ]  tail
+           
+           
+           
+
+A
+C
+E
+G
+
+
+
+
+D
+F
+B
