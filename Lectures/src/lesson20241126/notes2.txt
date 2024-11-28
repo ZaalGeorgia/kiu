@@ -1,0 +1,7 @@
+
+first == 4
+
+Node {
+  NEW_ITEM
+  null
+}

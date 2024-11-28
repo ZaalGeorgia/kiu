@@ -1,0 +1,26 @@
+A 
+B
+C
+D
+E
+F
+G
+H
+I
+J Jane:cat Jack:dragon
+K Kate:dog
+L
+M
+N
+O
+P Pete:bird
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z

@@ -1,0 +1,47 @@
+
+Node {  <--- first == 6    
+  Zero  
+  10
+}
+
+
+
+Node {   
+  "One"
+  16
+}
+
+Node {  
+  "Two"
+  16
+}
+
+Node { 
+  Three
+  21
+}
+
+// tail
+Node {  
+  Four
+  27
+}
+
+Node {  
+  Five
+  32
+}
+
+Node {  <--- last  == 32
+  item
+  null;
+
+
+
+
+
+
+
+
+
+

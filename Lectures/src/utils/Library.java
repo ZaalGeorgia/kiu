@@ -14,6 +14,12 @@ public class Library {
 		}
 	}
 
+	public static void print(final String[] a) {
+		for (String string: a) {
+			System.out.println(string);
+		}
+	}
+	
 	public static int sum(final int[] a) {
 		int sum = 0;
 		for (int i = 0; i < a.length; i++) {
