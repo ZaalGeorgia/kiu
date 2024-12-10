@@ -1,0 +1,4 @@
+Refactoring - process of changing code's structure
+
+TDD  Test-driven development
+Code Katas

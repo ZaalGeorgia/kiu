@@ -40,4 +40,16 @@ public class Library {
 		return t;
 	}
 
+	public static void printThreadInfo(Thread thread) {
+		System.out.println(thread + " " + thread.getState());
+	}
+
+	static public void pause(int delay) {
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
