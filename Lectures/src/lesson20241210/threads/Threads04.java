@@ -2,10 +2,11 @@ package lesson20241210.threads;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Threads04 {
 	
-	private static final int PORTION_SIZE = 20_000_000;
+	private static final int PORTION_SIZE = 10_000_000;
 	private static final int SIZE = 100_000_000;
 
 	public static void main(String[] args) throws InterruptedException {
@@ -37,8 +38,10 @@ public class Threads04 {
 	}
 
 	private static void fill(double[] data, int from, int to) {
+		Random r = new Random();
+		System.out.println(Thread.currentThread() + " from=" + from + " to="+to);
 		for (int i = from; i < to; i++) {
-			data[i] = Math.random();
+			data[i] = r.nextDouble();
 		}
 	}
 
