@@ -1,0 +1,4 @@
+
+YAGNI  - you ain't gonna need it
+
+high cohesion and low coupling
