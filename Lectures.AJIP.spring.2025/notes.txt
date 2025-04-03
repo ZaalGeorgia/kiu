@@ -1,0 +1,20 @@
+
+Functional Descriptors
+
+Comparator: int compare(T o1, T o2)    T, T -> int
+Runnable:  void run()                 () -> void
+
+Predicate<T>   T -> boolean
+Consumer<T>    T -> void
+Function:  R apply(T t)             T -> R    (int x) -> x * 2
+Supplier<T>    () -> T
+
+
+Method References
+
+(args) -> Classname.staticMethod(args)  ===> Classname::staticMethod
+(arg, rest) -> arg.instanceMethod(rest) ===> Classname::instanceMethod
+(args) -> expr.instanceMethod(args)     ===> expr::instanceMethod 
+
+Supplier get()  ===>  Classname::new
+Function        ===>  Classname::new
