@@ -43,12 +43,12 @@ public class WorkerThread implements Executor {
 	}
 	
 	public void shutdown() {
-		thread.interrupt();
-//		try {
-//			queue.put(poison);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
+//		thread.interrupt();
+		try {
+			queue.put(poison);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
