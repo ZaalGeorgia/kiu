@@ -1,0 +1,14 @@
+
+
+IP
+  UDP      1 2 3 4 5        ->     3 5 1    
+   TCP/IP  1 2 3 4 5  ->  1 2 3 4 5
+   
+   
+3-tier applications
+
+Client1 Client2 Client3
+Server
+Database 
+
+
