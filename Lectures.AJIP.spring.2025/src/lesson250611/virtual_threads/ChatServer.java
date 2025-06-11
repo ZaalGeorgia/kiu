@@ -1,4 +1,4 @@
-package lesson250605_chat.server;
+package lesson250611.virtual_threads;
 
 import java.io.IOException;
 import java.net.ServerSocket;

@@ -1,0 +1,97 @@
+79027
+2025-06-11T07:34:29.716212Z
+24.0.1
+
+#14 "Reference Handler"
+      java.base/java.lang.ref.Reference.waitForReferencePendingList(Native Method)
+      java.base/java.lang.ref.Reference.processPendingReferences(Reference.java:246)
+      java.base/java.lang.ref.Reference$ReferenceHandler.run(Reference.java:208)
+
+#15 "Finalizer"
+      java.base/java.lang.Object.wait0(Native Method)
+      java.base/java.lang.Object.wait(Object.java:389)
+      java.base/java.lang.Object.wait(Object.java:351)
+      java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:138)
+      java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:229)
+      java.base/java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:165)
+
+#16 "Signal Dispatcher"
+
+#23 "Notification Thread"
+
+#24 "Common-Cleaner"
+      java.base/java.lang.Object.wait0(Native Method)
+      java.base/java.lang.Object.wait(Object.java:389)
+      java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:124)
+      java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:215)
+      java.base/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:140)
+      java.base/java.lang.Thread.run(Thread.java:1447)
+      java.base/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:148)
+
+#25 "Thread-0"
+      java.base/java.lang.Thread.sleepNanos0(Native Method)
+      java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+      java.base/java.lang.Thread.sleep(Thread.java:513)
+      utils.Utils.pause(Utils.java:7)
+      lesson250611.virtual_threads.Example01.workload(Example01.java:19)
+      java.base/java.lang.Thread.run(Thread.java:1447)
+
+#26 "VirtualThread-unblocker"
+      java.base/java.lang.VirtualThread.takeVirtualThreadListToUnblock(Native Method)
+      java.base/java.lang.VirtualThread.unblockVirtualThreads(VirtualThread.java:1489)
+      java.base/java.lang.Thread.run(Thread.java:1447)
+      java.base/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:148)
+
+#30 "DestroyJavaVM"
+
+#33 "Attach Listener"
+      java.base/java.lang.Thread.getStackTrace(Thread.java:2166)
+      java.base/jdk.internal.vm.ThreadDumper.dumpThread(ThreadDumper.java:165)
+      java.base/jdk.internal.vm.ThreadDumper.lambda$dumpThreads$0(ThreadDumper.java:158)
+      java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+      java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+      java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+      java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+      java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:315)
+      java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+      java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:807)
+      java.base/jdk.internal.vm.ThreadDumper.dumpThreads(ThreadDumper.java:158)
+      java.base/jdk.internal.vm.ThreadDumper.dumpThreads(ThreadDumper.java:154)
+      java.base/jdk.internal.vm.ThreadDumper.dumpThreadsToFile(ThreadDumper.java:119)
+      java.base/jdk.internal.vm.ThreadDumper.dumpThreads(ThreadDumper.java:68)
+
+#27 "" virtual
+      java.base/java.lang.VirtualThread.parkNanos(VirtualThread.java:788)
+      java.base/java.lang.VirtualThread.sleepNanos(VirtualThread.java:967)
+      java.base/java.lang.Thread.sleepNanos(Thread.java:480)
+      java.base/java.lang.Thread.sleep(Thread.java:513)
+      utils.Utils.pause(Utils.java:7)
+      lesson250611.virtual_threads.Example01.workload(Example01.java:19)
+      java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+
+#31 "VirtualThread-unparker"
+      java.base/jdk.internal.misc.Unsafe.park(Native Method)
+      java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:271)
+      java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1802)
+      java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1166)
+      java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:883)
+      java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1021)
+      java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1081)
+      java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+      java.base/java.lang.Thread.run(Thread.java:1447)
+      java.base/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:148)
+
+#28 "ForkJoinPool-1-worker-1"
+      java.base/jdk.internal.misc.Unsafe.park(Native Method)
+      java.base/java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:2059)
+      java.base/java.util.concurrent.ForkJoinPool.deactivate(ForkJoinPool.java:2013)
+      java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1978)
+      java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+
+#32 "ForkJoinPool-1-worker-2"
+      java.base/jdk.internal.misc.Unsafe.park(Native Method)
+      java.base/java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:2059)
+      java.base/java.util.concurrent.ForkJoinPool.deactivate(ForkJoinPool.java:2013)
+      java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1978)
+      java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+

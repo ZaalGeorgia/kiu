@@ -1,4 +1,4 @@
-package lesson250605_chat.shared;
+package lesson250611.actors;
 
 import java.io.Serializable;
 
@@ -13,9 +13,12 @@ public class Command implements Serializable {
 	private final int code;
 	private final String text;
 
-	public Command(int code, String text) {
+	private Actor sender;
+
+	public Command(int code, String text, Actor sender) {
 		this.code = code;
 		this.text = text;
+		this.sender = sender;
 	}
 
 	public int getCode() {
@@ -29,5 +32,9 @@ public class Command implements Serializable {
 	@Override
 	public String toString() {
 		return code + " " + text;
+	}
+
+	public Actor getSender() {
+		return sender;
 	}
 }
